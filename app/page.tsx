@@ -67,7 +67,7 @@ async function checkArchive(domain: string): Promise<Omit<ScanResult, "domain">>
 
   try {
     const timeoutPromise = new Promise<never>((_, reject) => {
-      setTimeout(() => reject(new Error("Request timeout")), 15000) // 15 second timeout
+      setTimeout(() => reject(new Error("Request timeout")), 10000) // 15 second timeout
     })
 
     const checkPromise = fetch("/api/check-archive", {
@@ -195,7 +195,7 @@ export default function ArchiveChecker() {
     setPercentComplete(0)
 
     const batchSize = 10
-    const concurrentChecks = 5
+    const concurrentChecks = 3
     const totalBatchCount = Math.ceil(domainList.length / batchSize)
     setTotalBatches(totalBatchCount)
 
@@ -264,7 +264,7 @@ export default function ArchiveChecker() {
         setPercentComplete(Math.floor((completedCount / domainList.length) * 100))
 
         if (batchIndex + concurrentChecks < batch.length || i + batchSize < domainList.length) {
-          await delay(100)
+          await delay(12000)
         }
       }
     }
