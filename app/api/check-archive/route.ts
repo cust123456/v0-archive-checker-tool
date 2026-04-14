@@ -1,5 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server"
 import dns from 'dns/promises';   // ← Thêm dòng này
+export const runtime = 'nodejs';
 
 // Hàm timeout (giữ nguyên nhưng mình chỉnh nhỏ hơn)
 function fetchWithTimeout(url: string, options: RequestInit, timeoutMs: number): Promise<Response> {
